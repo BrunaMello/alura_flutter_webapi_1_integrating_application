@@ -38,9 +38,27 @@ class JournalService {
   }
 
   //lendo do banco
-  Future<String> get() async {
+  Future<List<Journal>> getAll() async {
     http.Response response = await client.get(Uri.parse(getUrl()));
-    print(response.body);
-    return response.body;
+
+    //se der errado o codigo para aqui
+    if(response.statusCode != 200) {
+      throw Exception();
+    }
+
+    //fazer uma lista vazia para preencher
+    List<Journal> list = [];
+
+    //preenchendo a lista com os items abaixo
+    List<dynamic> listDynamic = json.decode(response.body); //json ja retorna a lista automatico
+
+    //transformando em journal (usando o converter que esta no model)
+    for (var jsonMap in listDynamic){
+      list.add(Journal.fromMap(jsonMap));
+    }
+
+    return list;
   }
+
+
 }

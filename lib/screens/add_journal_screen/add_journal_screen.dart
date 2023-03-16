@@ -12,17 +12,16 @@ class AddJournalScreen extends StatelessWidget {
   //controlador para pegar as informacoes
   final TextEditingController _contentController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-            "${WeekDay(journal.createdAt.weekday).long.toLowerCase()}, ${journal.createdAt.day}  |   ${journal.createdAt.month}  |   ${journal.createdAt.year} "),
+        title: Text(WeekDay(journal.createdAt).toString()),
         actions: [
-          IconButton(onPressed: (){
-            registerJournal(context);
-          },
+          IconButton(
+              onPressed: () {
+                registerJournal(context);
+              },
               icon: Icon(Icons.check)),
         ],
       ),
@@ -31,9 +30,7 @@ class AddJournalScreen extends StatelessWidget {
         child: TextField(
           controller: _contentController,
           keyboardType: TextInputType.multiline,
-          style: const TextStyle(
-            fontSize: 24
-          ),
+          style: const TextStyle(fontSize: 24),
           expands: true,
           minLines: null,
           maxLines: null,
@@ -43,7 +40,7 @@ class AddJournalScreen extends StatelessWidget {
   }
 
   //registrando conteudo no db
-  registerJournal(BuildContext context) async {
+  registerJournal(BuildContext context) {
     //informacao do o corpo na variavel local
     String content = _contentController.text;
 
@@ -52,10 +49,10 @@ class AddJournalScreen extends StatelessWidget {
 
     //chamando o service
     JournalService service = JournalService();
-    bool result = await service.register(journal);
-
-    //voltar para a tela inicial
-    //fazer um snackbar (pegar o resultado boleano acima)
-    Navigator.pop(context, result);
+    service.register(journal).then((value) {
+      //voltar para a tela inicial
+      //fazer um snackbar (pegar o resultado boleano acima)
+      Navigator.pop(context, value);
+    });
   }
 }

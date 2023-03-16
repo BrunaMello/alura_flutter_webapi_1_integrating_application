@@ -19,6 +19,14 @@ class Journal {
         createdAt = DateTime.now(),
         updatedAt = DateTime.now();
 
+  //construtor para converter uma lista em journal
+  Journal.fromMap(Map<String, dynamic> map)
+      //pegando as informacoes do db
+      : id = map["id"],
+        content = map["content"],
+        createdAt = DateTime.parse(map["created_at"]),
+        updatedAt = DateTime.parse(map["updated_at"]);
+
   //post
   Map<String, dynamic> toMap() {
     return {
