@@ -4,22 +4,10 @@
   },
   "journals": [
     {
-      "id": "3bb83510-c427-11ed-a5de-c1eee85460dc",
-      "content": "segunda feira ",
-      "created_at": "2023-03-06 18:20:23.641429",
-      "updated_at": "2023-03-06 18:20:23.641429"
-    },
-    {
-      "id": "45f24f70-c427-11ed-a5de-c1eee85460dc",
-      "content": "quarta feira ",
-      "created_at": "2023-03-08 18:20:23.641429",
-      "updated_at": "2023-03-08 18:20:23.641429"
-    },
-    {
-      "id": "4e9994d0-c427-11ed-a5de-c1eee85460dc",
-      "content": "sabado",
-      "created_at": "2023-03-11 18:20:23.641429",
-      "updated_at": "2023-03-11 18:20:23.641429"
+      "id": "d23d8350-c45e-11ed-a5a3-95310612c290",
+      "content": "quinta feira 9",
+      "created_at": "2023-03-09 00:57:40.487165",
+      "updated_at": "2023-03-09 00:57:40.487165"
     }
   ]
 }

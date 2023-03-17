@@ -6,14 +6,16 @@ import 'package:flutter_webapi_first_course/services/journal_service.dart';
 class AddJournalScreen extends StatelessWidget {
   //instanciando as entradas de diario
   final Journal journal;
+  final bool isEditing;
 
-  AddJournalScreen({Key? key, required this.journal}) : super(key: key);
+  AddJournalScreen({Key? key, required this.journal, required this.isEditing}) : super(key: key);
 
   //controlador para pegar as informacoes
   final TextEditingController _contentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    _contentController.text = journal.content;
     return Scaffold(
       appBar: AppBar(
         title: Text(WeekDay(journal.createdAt).toString()),
@@ -49,10 +51,20 @@ class AddJournalScreen extends StatelessWidget {
 
     //chamando o service
     JournalService service = JournalService();
-    service.register(journal).then((value) {
-      //voltar para a tela inicial
-      //fazer um snackbar (pegar o resultado boleano acima)
-      Navigator.pop(context, value);
-    });
+
+    if (isEditing){
+      service.register(journal).then((value) {
+        //voltar para a tela inicial
+        //fazer um snackbar (pegar o resultado boleano acima)
+        Navigator.pop(context, value);
+      });
+    }else {
+      service.edit(journal.id, journal).then((value) {
+        //voltar para a tela inicial
+        //fazer um snackbar (pegar o resultado boleano acima)
+        Navigator.pop(context, value);
+      });
+    }
+
   }
 }
