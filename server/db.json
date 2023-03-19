@@ -1,4 +1,11 @@
 {
+  "users": [
+    {
+      "email": "bruna@gmail.com",
+      "password": "$2a$10$QeR2lb.pp/OgANStp8QXJ.HQFA7OSfbFxO9gXVDvKK7wVOezd5aF2",
+      "id": 1
+    }
+  ],
   "learninghttp": {
     "content": "Ola Mundo!"
   },
@@ -8,6 +15,12 @@
       "content": "quinta feira 9",
       "created_at": "2023-03-09 00:57:40.487165",
       "updated_at": "2023-03-09 00:57:40.487165"
+    },
+    {
+      "id": "6753b5a0-c661-11ed-a728-cf9b48cc475e",
+      "content": "segunda feira 13",
+      "created_at": "2023-03-13 14:20:13.366862",
+      "updated_at": "2023-03-13 14:20:13.366862"
     }
   ]
 }
