@@ -4,6 +4,16 @@
       "email": "bruna@gmail.com",
       "password": "$2a$10$QeR2lb.pp/OgANStp8QXJ.HQFA7OSfbFxO9gXVDvKK7wVOezd5aF2",
       "id": 1
+    },
+    {
+      "email": "marcelo@gmail.com",
+      "password": "$2a$10$JGa4C5ywb8AlLBDfX1z.fuGprKTGJtk7aDYfDHx2f3ZfA2VQNntoW",
+      "id": 2
+    },
+    {
+      "email": "bruna22@gmail.com",
+      "password": "$2a$10$h1iQYE.cPTgs9Ft1LgqZ2ury5CubYMP75LMZWKow31MfTLUG98Mte",
+      "id": 3
     }
   ],
   "learninghttp": {
