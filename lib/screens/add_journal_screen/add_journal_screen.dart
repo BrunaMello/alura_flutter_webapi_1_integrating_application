@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_webapi_first_course/helpers/weekday.dart';
 import 'package:flutter_webapi_first_course/models/journal.dart';
 import 'package:flutter_webapi_first_course/services/journal_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../helpers/logout.dart';
+import '../commom/exception_dialog.dart';
 
 class AddJournalScreen extends StatelessWidget {
   //instanciando as entradas de diario
@@ -26,7 +31,7 @@ class AddJournalScreen extends StatelessWidget {
               onPressed: () {
                 registerJournal(context);
               },
-              icon: Icon(Icons.check)),
+              icon: const Icon(Icons.check)),
         ],
       ),
       body: Padding(
@@ -62,13 +67,35 @@ class AddJournalScreen extends StatelessWidget {
             //voltar para a tela inicial
             //fazer um snackbar (pegar o resultado boleano acima)
             Navigator.pop(context, value);
-          });
+          }).catchError(
+            (error) {
+              logout(context);
+            },
+            test: (error) => error is TokenNotValidException,
+          ).catchError(
+            (error) {
+              var innerError = error as HttpException;
+              showExceptionDialog(context, content: innerError.message);
+            },
+            test: (error) => error is HttpException,
+          );
         } else {
           service.edit(journal.id, journal, token).then((value) {
             //voltar para a tela inicial
             //fazer um snackbar (pegar o resultado boleano acima)
             Navigator.pop(context, value);
-          });
+          }).catchError(
+            (error) {
+              logout(context);
+            },
+            test: (error) => error is TokenNotValidException,
+          ).catchError(
+            (error) {
+              var innerError = error as HttpException;
+              showExceptionDialog(context, content: innerError.message);
+            },
+            test: (error) => error is HttpException,
+          );
         }
       }
     });

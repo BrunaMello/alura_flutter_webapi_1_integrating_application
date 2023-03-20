@@ -14,6 +14,11 @@
       "email": "bruna22@gmail.com",
       "password": "$2a$10$h1iQYE.cPTgs9Ft1LgqZ2ury5CubYMP75LMZWKow31MfTLUG98Mte",
       "id": 3
+    },
+    {
+      "email": "bruna2@gmail.com",
+      "password": "$2a$10$GPR3PMzSDNXCHX31gAe/ledF43y.Dmnh39CXOBnno00TWgkFAzIAm",
+      "id": 4
     }
   ],
   "learninghttp": {
@@ -33,6 +38,34 @@
       "created_at": "2023-03-11 21:12:07.414769",
       "updated_at": "2023-03-11 21:12:07.414769",
       "userId": 1
+    },
+    {
+      "id": "1a96c600-c73b-11ed-a32b-ef6cea2d5559",
+      "content": "domingo test",
+      "created_at": "2023-03-12 15:52:50.567091",
+      "updated_at": "2023-03-12 15:52:50.567091",
+      "userId": 1
+    },
+    {
+      "id": "1d3c1510-c73e-11ed-a032-437174018b92",
+      "content": "testando atualizacao alterando",
+      "created_at": "2023-03-12 16:40:12.521216",
+      "updated_at": "2023-03-20 16:42:57.599594",
+      "userId": 1
+    },
+    {
+      "id": "0554c7b0-c740-11ed-b38f-3f2766b24700",
+      "content": "segunda 13",
+      "created_at": "2023-03-13 16:55:23.780558",
+      "updated_at": "2023-03-13 16:55:23.780558",
+      "userId": 4
+    },
+    {
+      "id": "0d992c90-c740-11ed-b38f-3f2766b24700",
+      "content": "quarta 15",
+      "created_at": "2023-03-15 16:55:23.780558",
+      "updated_at": "2023-03-15 16:55:23.780558",
+      "userId": 4
     }
   ]
 }

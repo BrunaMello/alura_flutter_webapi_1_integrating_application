@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_webapi_first_course/screens/commom/exception_dialog.dart';
 import 'package:flutter_webapi_first_course/screens/home_screen/widgets/home_screen_list.dart';
 import 'package:flutter_webapi_first_course/services/journal_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../helpers/logout.dart';
 import '../../models/journal.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -55,9 +59,13 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: Drawer(
         child: ListView(
           children: [
-            ListTile(onTap: (){
-              logout();
-            }, title: const Text("Sair"), leading: const Icon(Icons.logout),),
+            ListTile(
+              onTap: () {
+                logout(context);
+              },
+              title: const Text("Sair"),
+              leading: const Icon(Icons.logout),
+            ),
           ],
         ),
       ),
@@ -81,43 +89,45 @@ class _HomeScreenState extends State<HomeScreen> {
 
   //atualizar as informacoes da tela
   void refresh() {
-    SharedPreferences.getInstance().then((prefs) {
-      String? token = prefs.getString("accessToken");
-      String? email = prefs.getString("email");
-      int? id = prefs.getInt("id");
+    SharedPreferences.getInstance().then(
+      (prefs) {
+        String? token = prefs.getString("accessToken");
+        String? email = prefs.getString("email");
+        int? id = prefs.getInt("id");
 
-      if (token != null && email != null && id != null) {
-        setState(() {
-          userId = id;
-          userToken = token;
-        });
-        service
-            .getAll(id: id.toString(), token: token)
-            .then((List<Journal> listJournal) {
-          if (listJournal.isNotEmpty) {
-            setState(() {
-              //zerar o db para nao ter duplicados
-              database = {};
+        if (token != null && email != null && id != null) {
+          setState(() {
+            userId = id;
+            userToken = token;
+          });
+          service.getAll(id: id.toString(), token: token).then(
+            (List<Journal> listJournal) {
+              setState(() {
+                //zerar o db para nao ter duplicados
+                database = {};
 
-              //alimentando a tela com o db
-              for (Journal journal in listJournal) {
-                database[journal.id] = journal;
-              }
-            });
-          } else {
-            Navigator.pushReplacementNamed(context, "login");
-          }
-        });
-      } else {
-        Navigator.pushReplacementNamed(context, "login");
-      }
-    });
-  }
-
-  logout() {
-    SharedPreferences.getInstance().then((prefs) {
-      prefs.clear();
-      Navigator.pushReplacementNamed(context, "login");
-    });
+                //alimentando a tela com o db
+                for (Journal journal in listJournal) {
+                  database[journal.id] = journal;
+                }
+              });
+            },
+          );
+        } else {
+          Navigator.pushReplacementNamed(context, "login");
+        }
+      },
+    ).catchError(
+      (error) {
+        logout(context);
+      },
+      test: (error) => error is TokenNotValidException,
+    ).catchError(
+      (error) {
+        var innerError = error as HttpException;
+        showExceptionDialog(context, content: innerError.message);
+      },
+      test: (error) => error is HttpException,
+    );
   }
 }
